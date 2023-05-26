@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 
-const SVG = require("./svg");
+const SVG = require("./lib/svg");
 
 const { Triangle, Circle, Square } = require("./lib/shape");
 
@@ -14,11 +14,11 @@ function createShape() {
         message: "Enter up to three characters.",
         name: "characters",
         validate: (characters) =>
-          characters.length <= 3 || "Please choose only 3 characters or less.",
+          characters.length <= 3 || "Please choose between 1 and 3 characters.",
       },
       {
         type: "input",
-        message: "Choose a color choice for your text.",
+        message: "What color would you like the text for you logo?",
         name: "textColor",
       },
       {
@@ -29,7 +29,7 @@ function createShape() {
       },
       {
         type: "input",
-        message: "What color would you like for the shape?",
+        message: "What color would you like your shape?",
         name: "shapeColor",
       },
     ])
@@ -46,7 +46,7 @@ function createShape() {
           shape = new Square();
           break;
       }
-      shape.setColor(shapecolor);
+      shape.setColor(shapeColor);
       const svg = new SVG();
       svg.setText(characters, textColor);
       svg.setShape(shape);
@@ -57,3 +57,4 @@ function createShape() {
     });
 }
 
+createShape();
