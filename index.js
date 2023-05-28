@@ -24,7 +24,7 @@ function createShape() {
       {
         type: "list",
         message: "Choose one of the shapes for your image.",
-        name: "shape",
+        name: "type",
         choices: ["circle", "triangle", "square"],
       },
       {
@@ -33,9 +33,9 @@ function createShape() {
         name: "shapeColor",
       },
     ])
-    .then(({ characters, textColor, shape, shapeColor }) => {
+    .then(({ characters, textColor, type, shapeColor }) => {
       var shape;
-      switch (shape) {
+      switch (type) {
         case "circle":
           shape = new Circle();
           break;
@@ -51,6 +51,9 @@ function createShape() {
       svg.setText(characters, textColor);
       svg.setShape(shape);
       return writeFile("logo.svg", svg.render());
+    })
+    .then(() => {
+      console.log("Generated logo.svg")
     })
     .catch((err) => {
       console.log(err);
